@@ -3,6 +3,7 @@ import requests
 import json
 import  pandas as pd
 
+# Selection of african movies on imdb website
 
 def extract_data(container):
         title = container.find('h3', class_='lister-item-header').find('a').get_text()

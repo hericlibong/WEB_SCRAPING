@@ -3,6 +3,8 @@ import requests
 import json
 import pandas as pd
 
+# Selection of african movies on imdb website
+
 
 page = requests.get('https://www.imdb.com/list/ls051534056/?st_dt=&mode=detail&page=1&sort=list_order,asc')
 

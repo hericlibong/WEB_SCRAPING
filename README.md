@@ -1,5 +1,5 @@
 
-## Scraping wiih BeautifullSoup
+## Scraping collections
 
-On this repo you can find scraped data with beautiful Soup on different sites.<br>
-![image](parsing-html-with-beautifulsoup-in-python-1.jpeg)
+#### This Repo presents a collection of scraped sites with Beautifull Soup, Scrapy, Selenium, and Splash.   
+<br>

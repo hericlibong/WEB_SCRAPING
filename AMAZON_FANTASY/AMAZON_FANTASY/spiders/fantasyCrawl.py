@@ -23,19 +23,19 @@ class FantasycrawlSpider(CrawlSpider):
         kindle_price = response.xpath("//a//span[@class='a-size-base a-color-secondary']/text()").get()
         paperback_price = response.xpath("//a//span[@class='a-size-base a-color-price a-color-price']/text()").get()
         ratings = response.xpath("//span[@id='acrCustomerReviewText']/text()").get()
-        short_text = response.xpath("//div[@aria-expanded='false']//span/following-sibling :: node()/text()[1]").get()
-        '''
-        books = AmazonFantasyItem()
-        books['Title']=title
-        books['PaperDate'] = date
-        books['Author'] = author
-        books['KindlePrice']=kindle_price
-        books['PaperbackPrice']= paperback_price
-        books['Ratings'] = ratings
-        books['Resume'] = short_text
+        #short_text = response.xpath("//div[@aria-expanded='false']//span/following-sibling :: node()/text()[1]").get()
+    
+        # books = AmazonFantasyItem()
+        # books['Title']=title
+        # books['PaperDate'] = date
+        # books['Author'] = author
+        # books['KindlePrice']=kindle_price
+        # books['PaperbackPrice']= paperback_price
+        # books['Ratings'] = ratings
+        # books['Resume'] = short_text
         
-        yield books
-        '''
+        # yield books
+        
         
         l = ItemLoader(item=AmazonFantasyItem(), response=response)
         l.add_xpath("Title","//h1[@id='title']/span[1]/text()")
@@ -44,19 +44,12 @@ class FantasycrawlSpider(CrawlSpider):
         l.add_xpath("KindlePrice", "//a//span[@class='a-size-base a-color-secondary']/text()")
         l.add_xpath("PaperbackPrice","//a//span[@class='a-size-base a-color-price a-color-price']/text()")
         l.add_xpath("Ratings", "//span[@id='acrCustomerReviewText']/text()")
-        l.add_xpath("Resume","//div[@aria-expanded='false']//span/following-sibling :: node()/text()[1]" )
+        #l.add_xpath("Resume","//div[@aria-expanded='false']//span/following-sibling :: node()/text()[1]" )
         
         yield l.load_item()
         
-        # yield {
-        # 'Title':title,
-        # 'Date': date,
-        # 'Author':author,
-        # 'Kindle Price': kindle_price,
-        # 'Paperback Price':paperback_price,
-        # 'Ratings':ratings,
-        # 'Resume':short_text               
-        #        }
+                       
+      
         
         
         

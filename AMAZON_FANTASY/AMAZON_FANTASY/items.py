@@ -42,10 +42,10 @@ class AmazonFantasyItem(scrapy.Item):
         input_processor = MapCompose(clean_rating, remove_tags),
         output_processor =TakeFirst()
     )
-    Resume = scrapy.Field(
-        input_processor = MapCompose(remove_tags),
-        #output_processor = TakeFirst()
-    )
+    # Resume = scrapy.Field(
+    #     input_processor = MapCompose(remove_tags),
+    #     #output_processor = TakeFirst()
+    # )
     
    
     

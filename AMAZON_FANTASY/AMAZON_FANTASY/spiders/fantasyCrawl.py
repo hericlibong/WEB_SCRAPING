@@ -16,35 +16,17 @@ class FantasycrawlSpider(CrawlSpider):
         Rule(LinkExtractor(restrict_xpaths="//a[@class='s-pagination-item s-pagination-next s-pagination-button s-pagination-separator']"))
     )
 
-    def parse_item(self, response):
-        title = response.xpath("//h1[@id='title']/span[1]/text()").get()
-        date = response.xpath("//h1[@id='title']/span[2]/text()").get()
-        author = response.xpath("//a[@class='a-link-normal contributorNameID']/text()").get()
-        kindle_price = response.xpath("//a//span[@class='a-size-base a-color-secondary']/text()").get()
-        paperback_price = response.xpath("//a//span[@class='a-size-base a-color-price a-color-price']/text()").get()
-        ratings = response.xpath("//span[@id='acrCustomerReviewText']/text()").get()
-        #short_text = response.xpath("//div[@aria-expanded='false']//span/following-sibling :: node()/text()[1]").get()
-    
-        # books = AmazonFantasyItem()
-        # books['Title']=title
-        # books['PaperDate'] = date
-        # books['Author'] = author
-        # books['KindlePrice']=kindle_price
-        # books['PaperbackPrice']= paperback_price
-        # books['Ratings'] = ratings
-        # books['Resume'] = short_text
-        
-        # yield books
-        
-        
+    def parse_item(self, response): 
         l = ItemLoader(item=AmazonFantasyItem(), response=response)
-        l.add_xpath("Title","//h1[@id='title']/span[1]/text()")
-        l.add_xpath("PaperDate","//h1[@id='title']/span[2]/text()")
+        l.add_xpath("BookTitle","//h1[@id='title']/span[1]/text()")
+        l.add_xpath("Date","//h1[@id='title']/span[2]/text()")
         l.add_xpath("Author","//a[@class='a-link-normal contributorNameID']/text()")
-        l.add_xpath("KindlePrice", "//a//span[@class='a-size-base a-color-secondary']/text()")
-        l.add_xpath("PaperbackPrice","//a//span[@class='a-size-base a-color-price a-color-price']/text()")
+        l.add_xpath("PriceBkindle", "//a//span[@class='a-size-base a-color-secondary']/text()")
+        l.add_xpath("PriceAPaperback","//a//span[@class='a-size-base a-color-price a-color-price']/text()")
         l.add_xpath("Ratings", "//span[@id='acrCustomerReviewText']/text()")
-        #l.add_xpath("Resume","//div[@aria-expanded='false']//span/following-sibling :: node()/text()[1]" )
+        l.add_xpath("XcoverPicture", "//div[@id='litb-canvas']//img/@src")
+        l.add_xpath("SummaryAuthor", "//div[@class='a-section a-spacing-small a-padding-base']/div/span/text()")
+        
         
         yield l.load_item()
         

@@ -21,20 +21,23 @@ def clean_rating(rateval):
 
 
 class AmazonFantasyItem(scrapy.Item):
-    Title = scrapy.Field(
+    BookTitle = scrapy.Field(
         input_processor = MapCompose(),
         output_processor = TakeFirst()
     )
-    PaperDate = scrapy.Field(
+    Date = scrapy.Field(
         input_processor = MapCompose(clean_date,),
         output_processor = TakeFirst()
     )
-    Author = scrapy.Field()
-    KindlePrice = scrapy.Field(
+    Author = scrapy.Field(
+        input_processor = MapCompose(remove_tags),
+        #output_processor = TakeFirst()
+    )
+    PriceBkindle = scrapy.Field(
         input_processor = MapCompose(clean_price),
         outout_processor = TakeFirst()
     )
-    PaperbackPrice = scrapy.Field(
+    PriceAPaperback = scrapy.Field(
         input_processor = MapCompose(clean_price, remove_tags),
         output_processor =TakeFirst()
     )
@@ -42,10 +45,14 @@ class AmazonFantasyItem(scrapy.Item):
         input_processor = MapCompose(clean_rating, remove_tags),
         output_processor =TakeFirst()
     )
-    # Resume = scrapy.Field(
-    #     input_processor = MapCompose(remove_tags),
-    #     #output_processor = TakeFirst()
-    # )
+    SummaryAuthor = scrapy.Field(
+         input_processor = MapCompose(remove_tags),
+         #output_processor = TakeFirst()
+     )
+    XcoverPicture =scrapy.Field(
+        input_processor= MapCompose(remove_tags)
+        
+    )
     
    
     
